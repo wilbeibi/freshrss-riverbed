@@ -1,9 +1,14 @@
 # Riverbed
 
-A reading-first theme for [FreshRSS](https://github.com/FreshRSS/FreshRSS) 1.29+.
-Tufte warm-white light mode, Linear-style near-black dark mode, Newsreader serif
-for articles, Inter for chrome. Built for daily triage and long-form reading,
-in English and Chinese, on desktop and phone.
+A theme for [FreshRSS](https://github.com/FreshRSS/FreshRSS) that treats reading as the point.
+
+FreshRSS is where your feeds live. Riverbed is what makes sitting down with them
+feel less like clearing an inbox and more like reading. The timeline stays quiet
+so you can triage fast. Open an article and the page is set like a book — one
+serif column, a comfortable width, a comfortable size — so you actually read it.
+
+Made for daily reading in English and Chinese, on the desktop and the phone, in
+light and dark.
 
 **Timeline — light**
 
@@ -17,35 +22,28 @@ in English and Chinese, on desktop and phone.
 
 ![Article view, light](docs/article-light.png)
 
-## What you get
+## What changes
 
-- **Typography first.** Articles render in Newsreader (self-hosted, latin-only
-  woff2 with `unicode-range`, so Chinese text uses your system serif with zero
-  webfont delay) at 18px/1.6 on a measured column. The FreshRSS "content width"
-  setting maps to real measures: thin 58ch, medium 66ch (the ideal), large 80ch.
-- **Mixed Chinese/English.** Article prose uses native CSS `text-autospace`
-  and `text-spacing-trim`, so a ~1/8em gap falls between 中文 and Latin/digits
-  and fullwidth punctuation tightens up — a progressive enhancement that simply
-  does nothing on browsers that don't support it yet. MathML renders natively;
-  KaTeX/MathJax output keeps its own fonts.
-- **Native light/dark.** Every color is declared once via CSS `light-dark()`;
-  FreshRSS's own per-user setting (Settings → Display → Automatic dark mode)
-  drives `color-scheme`. `auto` follows the OS, `no` forces light. No JS.
-- **Quiet chrome.** 13px UI density, monochrome icons, unread counts as plain
-  tabular numbers, unread articles marked by dot + weight (never color alone),
-  row actions revealed on hover but always visible on touch.
-- **Mobile.** Works with FreshRSS's drawer + bottom-pager model at ≤840px:
-  44px touch targets, safe-area padding, sheet-style menus. Compatible with the
-  TouchControl extension's swipe detection.
-- **Accessible.** WCAG AA contrast on every token pair (verified in both
-  schemes), visible focus rings everywhere, `prefers-reduced-motion` disables
-  all transitions including core's drawer and slider.
+- **The article reads like a page, not a feed.** Body text is set in a serif
+  (Newsreader) at a book-like size on a measured column, so long pieces stop
+  feeling like a wall of screen.
+- **A calm timeline.** Quiet chrome, monochrome icons, unread shown by a dot and
+  a little weight instead of loud color. Your eye lands on the writing, not the UI.
+- **Dark mode that follows you.** It rides FreshRSS's own dark-mode setting and
+  your system preference — warm white by day, near-black at night. Nothing extra
+  to toggle.
+- **Chinese and English sit well together.** Mixed 中文 and English text gets the
+  small breathing space it needs, and Chinese renders in your system's serif with
+  no loading delay.
+- **Built for the phone too.** Big touch targets, safe-area padding, and the
+  swipe gestures you already use (works with the TouchControl extension).
+- **Easy on the eyes, on purpose.** Every text-on-background pair meets WCAG AA
+  contrast in both light and dark, and animation respects "reduce motion."
 
 ## Install
 
-A FreshRSS theme lives at `p/themes/Riverbed/` inside the FreshRSS web root. The
-actual theme is the `Riverbed/` folder in this repo; `deploy.sh` copies it there
-and bundles the CSS (see [Why bundle](#why-bundle-the-css)).
+You already run FreshRSS, so this is one clone and one command. The theme is the
+`Riverbed/` folder in this repo; `deploy.sh` copies it into place.
 
 ```sh
 git clone https://github.com/wilbeibi/freshrss-riverbed.git
@@ -55,45 +53,43 @@ DEST=/path/to/FreshRSS/p/themes/Riverbed ./deploy.sh
 
 Then pick **Riverbed** in Settings → Display → Theme.
 
-**Docker / Podman.** The image's `p/themes/` is not persisted, so bind-mount a
-host directory read-only and point `DEST` at it. In the compose/quadlet:
+**Docker / Podman.** The image's `p/themes/` isn't persisted, so bind-mount a
+host directory read-only and point `DEST` at it:
 
 ```
 Volume=/host/freshrss/themes/Riverbed:/var/www/FreshRSS/p/themes/Riverbed:ro
 ```
 
 Restart the container once, then `DEST=/host/freshrss/themes/Riverbed ./deploy.sh`.
-CSS updates afterwards need no restart.
+Later CSS updates need no restart.
 
-**No shell?** Copy the `Riverbed/` folder into `p/themes/` directly. It works,
-but skips bundling — after a theme *update* you may need to hard-refresh once to
-clear the browser cache (see below).
+**No shell?** Copy the `Riverbed/` folder into `p/themes/` directly. It works —
+just hard-refresh once after a future update to clear the browser cache.
 
-### Why bundle the CSS
-
-The theme's source is split into `_*.css` partials that `Riverbed/riverbed.css`
-`@import`s. `deploy.sh` inlines them into a single served `riverbed.css`.
-FreshRSS's Apache serves theme assets with a 30-day `Cache-Control` and only
-cache-busts the metadata-listed file by mtime, so runtime `@import` partials
-would go stale for up to a month after an update. Bundling makes every update
-land immediately.
-
-## Recommended FreshRSS settings
+### Recommended settings
 
 - Automatic dark mode: **Auto**
-- Content width: **Medium** (66ch; "Thin" ≈ 39 CJK chars/line if you read mostly Chinese)
+- Content width: **Medium** (the ideal reading measure; pick **Thin** if you read mostly Chinese)
 - Website: **Icon and name**
 
-## Limitations
+## Good to know
 
-- FreshRSS's dark-mode setting has two states (`no` / `auto`); there is no
-  "always dark while the OS is light". Set your OS/browser to dark instead.
-- Login/registration pages render with the **default user's** theme, so they
-  only show Riverbed once the default user selects it.
-- FreshRSS core updates can change selectors. The theme fails soft — anything
-  unstyled falls back to core's structure, never a broken page — but a major
-  update may need a visual pass (see [DESIGN.md](DESIGN.md) for the surfaces
-  Riverbed styles).
+- FreshRSS's dark mode has two states: follow the system (**Auto**) or force
+  light (**No**). There's no "always dark while my system is light" — set your
+  system or browser to dark for that.
+- Login and registration pages use the **default user's** theme, so they only
+  show Riverbed once the default user has selected it.
+- FreshRSS updates can move things under the hood. Riverbed fails soft: anything
+  it hasn't styled falls back to plain FreshRSS, never a broken page.
+
+## Under the hood
+
+For the curious, or anyone extending it: the design rationale — color tokens,
+type scale, the CJK-aware typesetting — lives in [DESIGN.md](DESIGN.md).
+
+`deploy.sh` bundles the theme's source partials into a single `riverbed.css`
+because FreshRSS serves theme assets with a 30-day cache and only busts the one
+metadata-listed file; bundling makes every update land right away.
 
 ## Licensing
 
