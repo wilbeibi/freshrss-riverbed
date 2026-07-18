@@ -1,0 +1,107 @@
+/* ---------------------------------------------------------------------------
+ * Overlay surfaces: dropdowns, slider (feed settings), panel (global-view
+ * article), popup, notifications. All sit on --rb-surface-2: in dark mode
+ * elevation is a lighter surface, with just enough shadow to separate.
+ * ------------------------------------------------------------------------- */
+
+.dropdown-menu {
+	background-color: var(--rb-surface-2);
+	border: 1px solid var(--rb-border);
+	border-radius: var(--rb-radius-m);
+	box-shadow: var(--rb-shadow-overlay);
+	padding: var(--rb-space-1) 0;
+	font-size: var(--rb-ui);
+	min-width: 220px;
+}
+
+/* No pointer arrow: the card stands on its own. */
+.dropdown-menu::after {
+	display: none;
+}
+
+.dropdown-menu .item > a,
+.dropdown-menu .item > .as-link,
+.dropdown-menu .item > span,
+.dropdown-menu .item > button {
+	padding: 6px var(--rb-space-3);
+	color: var(--rb-text);
+}
+
+.dropdown-menu .item > a:hover,
+.dropdown-menu .item > .as-link:hover {
+	background: var(--rb-hover);
+	text-decoration: none;
+}
+
+.dropdown-header,
+.dropdown-section-title {
+	padding: 6px var(--rb-space-3) 2px;
+	color: var(--rb-text-3);
+	font-size: var(--rb-text-11);
+	font-weight: 500;
+}
+
+.item ~ .dropdown-header,
+.dropdown-section ~ .dropdown-section,
+.item.separator {
+	border-top-color: var(--rb-hairline);
+}
+
+.dropdown-menu > .item[aria-checked="true"] > a {
+	color: var(--rb-accent-text);
+	font-weight: 500;
+}
+
+/* -- Slider (feed / category settings sheet from the right) ---------------- */
+
+#slider {
+	background-color: var(--rb-surface-2);
+	border-inline-start: 1px solid var(--rb-hairline);
+}
+
+/* -- Panel (article modal in global view) + popup --------------------------- */
+
+#panel {
+	background-color: var(--rb-surface-2);
+	border: 1px solid var(--rb-hairline);
+	border-radius: var(--rb-radius-m);
+}
+
+#popup-content {
+	background-color: var(--rb-surface-2);
+	border-radius: var(--rb-radius-m);
+	box-shadow: var(--rb-shadow-overlay);
+}
+
+/* -- Notifications (top-center toast) --------------------------------------- */
+
+.notification {
+	background-color: var(--rb-surface-2);
+	border: 1px solid var(--rb-border);
+	border-radius: var(--rb-radius-m);
+	box-shadow: var(--rb-shadow-overlay);
+	font-size: var(--rb-ui);
+	font-weight: 500;
+	color: var(--rb-text);
+}
+
+.notification.good {
+	color: var(--rb-ok);
+}
+
+.notification.bad {
+	color: var(--rb-danger);
+}
+
+.notification .close {
+	color: var(--rb-text-2);
+}
+
+#actualizeProgress {
+	background-color: var(--rb-surface-2);
+	border: 1px solid var(--rb-border);
+	border-radius: var(--rb-radius-m);
+	box-shadow: var(--rb-shadow-overlay);
+	padding: var(--rb-space-2) var(--rb-space-4);
+	font-size: var(--rb-ui);
+}

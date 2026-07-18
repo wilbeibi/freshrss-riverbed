@@ -1,0 +1,51 @@
+/* ---------------------------------------------------------------------------
+ * Top header (logo / search / settings) and the article toolbar (.nav_menu).
+ * ------------------------------------------------------------------------- */
+
+.header {
+	background: var(--rb-bg);
+	border-bottom: 1px solid var(--rb-hairline);
+}
+
+.header > .item.title {
+	text-align: start;
+}
+
+.header > .item.title a {
+	padding: 0.25rem var(--rb-space-4);
+}
+
+.header > .item.title .logo {
+	height: 1.75rem;
+}
+
+/* Header search: compact filled field + fused button. */
+.header .item.search .stick {
+	max-width: 420px;
+	width: 100%;
+}
+
+.header .item.search input[type="search"] {
+	width: 100%;
+	margin: 0;
+}
+
+/* Toolbar above the timeline. Sticky so actions stay reachable mid-list. */
+.nav_menu {
+	position: sticky;
+	top: 0;
+	z-index: var(--rb-z-dropdown);
+	background: var(--rb-bg);
+	border-bottom: 1px solid var(--rb-hairline);
+	padding-top: var(--rb-space-1);
+	padding-bottom: var(--rb-space-1);
+	text-align: start;
+	padding-inline-start: var(--rb-space-3);
+}
+
+/* Toolbar groups breathe a little. */
+.nav_menu > .nav_menu_group,
+.nav_menu > nav,
+.nav_menu > div {
+	margin-inline-end: var(--rb-space-1);
+}

@@ -1,0 +1,221 @@
+/* ---------------------------------------------------------------------------
+ * Timeline list (normal view). Row anatomy: [actions] favicon+source · title
+ * (+author) · 2-line summary · date. Unread = accent dot + weight; read rows
+ * dim; row actions reveal on hover/focus but stay in the accessibility tree
+ * (opacity only) and are always visible on touch (see _mobile.css).
+ * ------------------------------------------------------------------------- */
+
+.flux {
+	border-bottom: 1px solid var(--rb-hairline);
+	transition: background-color var(--rb-dur-1) var(--rb-ease);
+	/* Skip layout/paint of off-screen rows on long unread lists. If j/k
+	 * scroll-to ever lands imprecisely, remove these two lines. */
+	content-visibility: auto;
+	contain-intrinsic-size: auto 44px;
+}
+
+/* Desktop column tightening. Core reserves generous fixed cells: the two
+ * hover-revealed action cells made an ~80px void at the row start, and the
+ * 200px source cell left short feed names far from their titles. Keep just
+ * the icon footprint + a steady source column. (≤840px keeps core's own
+ * mobile layout and bigger touch targets.) */
+@media (min-width: 841px) {
+	.flux .item.manage,
+	.flux .flux_header > .item.labels,
+	.flux .flux_header > .item.share,
+	.flux .item.link {
+		width: calc(1rem + 4px);
+	}
+
+	.flux .flux_header .item.manage .item-element,
+	.flux .flux_header .item.website .item-element,
+	.flux .flux_header .item.share .dropdown-toggle,
+	.flux .flux_header .item.link .item-element {
+		padding-left: 6px;
+		padding-right: 6px;
+	}
+
+	.flux .item.website {
+		width: 164px;
+	}
+
+	/* Title-only rows read tighter without the excerpt. */
+	.flux .flux_header .item .item-element {
+		padding-block: 6px;
+	}
+
+	/* Day separators share the rows' content axis. */
+	.transition {
+		padding-inline-start: calc(2 * (1rem + 4px) + 6px);
+	}
+}
+
+.flux:hover {
+	background-color: var(--rb-hover);
+}
+
+/* The open article's own row. */
+.flux.current {
+	background-color: var(--rb-accent-tint);
+}
+
+/* -- Title ----------------------------------------------------------------- */
+
+.flux .flux_header .item .title {
+	font-size: var(--rb-text-14);
+	color: var(--rb-text-2);
+	font-weight: 400;
+}
+
+.flux.not_read .item .title,
+.flux.current .item .title {
+	color: var(--rb-text);
+	font-weight: 600;
+}
+
+/* Unread dot: redundant with weight (never color alone). */
+.flux.not_read .flux_header .item .title::before {
+	content: "";
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	margin-inline-end: 8px;
+	margin-bottom: 2px;
+	border-radius: 50%;
+	background: var(--rb-accent);
+}
+
+/* Manually kept unread: hollow dot marks the explicit intent. */
+.flux.keep_unread .flux_header .item .title::before {
+	background: transparent;
+	box-shadow: inset 0 0 0 1.5px var(--rb-accent);
+}
+
+.flux .flux_header .item .title .author {
+	color: var(--rb-text-3);
+	font-size: var(--rb-text-12);
+}
+
+/* -- Source (favicon + name) ---------------------------------------------- */
+
+.flux .item.website a {
+	color: var(--rb-text-3);
+	font-size: var(--rb-text-12);
+}
+
+.flux .item.website a:hover {
+	color: var(--rb-text);
+	text-decoration: none;
+}
+
+.flux .item.website .favicon {
+	margin-inline-end: 4px;
+}
+
+.website a:hover .favicon,
+a.website:hover .favicon {
+	filter: none;
+}
+
+/* -- Summary + date -------------------------------------------------------- */
+
+.flux .flux_header .item .summary {
+	color: var(--rb-text-3);
+	font-size: var(--rb-text-13);
+	line-height: 1.45;
+}
+
+.flux .flux_header .date,
+.flux .flux_content .bottom .date {
+	font-size: var(--rb-text-12);
+	color: var(--rb-text-3);
+	font-variant-numeric: tabular-nums;
+}
+
+/* -- Row actions: reveal on hover / keyboard focus ------------------------- */
+
+.flux .item.manage .item-element,
+.flux .item.share .item-element,
+.flux .item.link .item-element,
+.flux .item.labels .item-element {
+	opacity: 0;
+	transition: opacity var(--rb-dur-2) var(--rb-ease);
+}
+
+.flux:hover :is(.item.manage, .item.share, .item.link, .item.labels) .item-element,
+.flux:focus-within :is(.item.manage, .item.share, .item.link, .item.labels) .item-element,
+.flux.current :is(.item.manage, .item.share, .item.link, .item.labels) .item-element {
+	opacity: 1;
+}
+
+/* State beats reveal: favourited and kept-unread markers always show. */
+.flux.favorite .item.manage .item-element,
+.flux.keep_unread .item.manage .item-element {
+	opacity: 1;
+}
+
+/* -- Thumbnails ------------------------------------------------------------ */
+
+.flux .flux_header .item.thumbnail img {
+	background: var(--rb-hover);
+	border-radius: var(--rb-radius-s);
+}
+
+/* -- Day separators -------------------------------------------------------- */
+
+.transition {
+	padding: var(--rb-space-4) var(--rb-space-3) var(--rb-space-1);
+	color: var(--rb-text-2);
+	font-size: var(--rb-text-12);
+	font-weight: 500;
+}
+
+.transition .name {
+	color: var(--rb-text-3);
+}
+
+/* -- New-articles notice, load more, end-of-list --------------------------- */
+
+#new-article {
+	background: var(--rb-accent-tint);
+}
+
+#new-article > a {
+	color: var(--rb-accent-text);
+	font-weight: 500;
+	text-align: center;
+}
+
+#new-article > a:hover {
+	text-decoration: none;
+}
+
+#load_more,
+#first_load {
+	color: var(--rb-text-2);
+}
+
+#stream-footer {
+	border-top: 1px solid var(--rb-hairline);
+	color: var(--rb-text-3);
+	font-size: var(--rb-ui-meta);
+}
+
+/* Big end-of-list "mark all as read" target: a calm card, not a billboard. */
+#bigMarkAsRead {
+	background: var(--rb-surface);
+	color: var(--rb-text-2);
+	border-radius: var(--rb-radius-m);
+	margin: var(--rb-space-4);
+	transition: background-color var(--rb-dur-2) var(--rb-ease), color var(--rb-dur-2) var(--rb-ease);
+}
+
+#bigMarkAsRead:hover {
+	background: var(--rb-hover);
+	color: var(--rb-text);
+	text-decoration: none;
+}
+
+#bigMarkAsRead .bigTick {
+	color: var(--rb-accent);
+}

@@ -1,0 +1,79 @@
+/* ---------------------------------------------------------------------------
+ * Global view (category boxes) and reader view (continuous article cards).
+ * ------------------------------------------------------------------------- */
+
+#stream.global {
+	padding: var(--rb-space-3);
+}
+
+.box {
+	background: var(--rb-surface);
+	border: 1px solid var(--rb-hairline);
+	border-radius: var(--rb-radius-m);
+	overflow: hidden;
+}
+
+.box .box-title {
+	padding: var(--rb-space-2) var(--rb-space-4);
+	border-bottom: 1px solid var(--rb-hairline);
+}
+
+.box .box-title h2 {
+	font-size: var(--rb-text-15);
+	font-weight: 600;
+}
+
+.box .box-title a.title {
+	color: var(--rb-text);
+}
+
+.box .box-content {
+	font-size: var(--rb-ui);
+}
+
+.box .box-content .feed.item a.item-title {
+	color: var(--rb-text-2);
+}
+
+.box .box-content .feed.item a.item-title:hover {
+	color: var(--rb-text);
+	text-decoration: none;
+}
+
+.box .box-content .feed.item a.item-title:not([data-unread="0"]) {
+	color: var(--rb-text);
+	font-weight: 500;
+}
+
+/* Global-view unread badges: same quiet numbers as the sidebar. */
+.global .box.category .title:not([data-unread="0"])::after,
+#stream.global .feed .item-title:not([data-unread="0"])::after {
+	padding: 0;
+	min-width: 0;
+	background: none;
+	border: none;
+	color: var(--rb-text-3);
+	font-size: var(--rb-text-11);
+	font-weight: 500;
+	font-variant-numeric: tabular-nums;
+}
+
+/* -- Reader view: article cards on the canvas ------------------------------- */
+
+.reader .flux .flux_content {
+	background-color: var(--rb-surface-2);
+	border: 1px solid var(--rb-hairline);
+	border-radius: var(--rb-radius-m);
+}
+
+/* Diagnostics block on the About page. */
+.envInfo dl {
+	border: 1px solid var(--rb-hairline);
+	border-radius: var(--rb-radius-s);
+	background: var(--rb-surface);
+}
+
+.envInfo dd {
+	font-family: var(--rb-font-mono);
+	font-size: var(--rb-ui-meta);
+}

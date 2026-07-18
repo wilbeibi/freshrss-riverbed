@@ -1,0 +1,189 @@
+/* ---------------------------------------------------------------------------
+ * Sidebar: subscription tree. 13px density, quiet rows, tabular unread
+ * counts as plain right-aligned numbers (no badge pills, no red).
+ * ------------------------------------------------------------------------- */
+
+.aside {
+	background: var(--rb-surface);
+	font-size: var(--rb-ui);
+}
+
+.aside.aside_feed {
+	border-inline-end: 1px solid var(--rb-hairline);
+}
+
+/* Sidebar text never uses link blue. */
+.aside a {
+	color: var(--rb-text);
+}
+
+.aside a:hover {
+	color: var(--rb-text);
+	text-decoration: none;
+}
+
+/* Top actions: core marks both as btn-important; keep them quiet here —
+ * the sidebar has no primary action. */
+.stick.configure-feeds {
+	padding: var(--rb-space-2);
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.stick.configure-feeds .btn,
+.stick.configure-feeds .btn.btn-important {
+	background: var(--rb-surface-2);
+	border: 1px solid var(--rb-border);
+	color: var(--rb-text-2);
+	font-weight: 500;
+}
+
+.stick.configure-feeds .btn:hover {
+	background: var(--rb-hover);
+	color: var(--rb-text);
+}
+
+.stick.configure-feeds #btn-subscription {
+	flex-grow: 1;
+	text-align: start;
+}
+
+/* -- Tree rows --------------------------------------------------------------
+ * Rows are flex lines with an inset rounded hover (Linear-style). The unread
+ * count is the .title's ::after, absolutely pinned to the row's end edge.
+ * ------------------------------------------------------------------------- */
+
+.tree {
+	padding: 0 var(--rb-space-2) var(--rb-space-2);
+}
+
+.tree-folder-title {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px var(--rb-space-2);
+	margin-top: 2px;
+	border-radius: var(--rb-radius-s);
+}
+
+.tree-folder-title:hover {
+	background: var(--rb-hover);
+}
+
+.aside_feed .tree-folder-title > .title,
+.tree-folder-title > .title {
+	width: auto;
+	flex: 1 1 auto;
+	min-width: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-weight: 500;
+	color: var(--rb-text);
+}
+
+/* Keep long names clear of the count. */
+.aside_feed .category .title:not([data-unread="0"]),
+.aside .tree-folder-title > .title:not([data-unread="0"]) {
+	width: auto;
+	padding-inline-end: 2.5rem;
+}
+
+/* Category folders read one step stronger than feed rows. */
+.tree-folder.category > .tree-folder-title > .title {
+	font-weight: 600;
+}
+
+.tree-folder.active > .tree-folder-title {
+	background: var(--rb-hover);
+}
+
+/* Feed rows. */
+.tree-folder-items > .item {
+	border-radius: var(--rb-radius-s);
+	margin-top: 1px;
+}
+
+.tree-folder-items > .item:hover,
+.tree-folder-items > .item.active {
+	background: var(--rb-hover);
+}
+
+.aside .feed .item-title {
+	padding: 5px 2.75rem 5px 0;
+	box-sizing: border-box;
+	color: var(--rb-text-2);
+}
+
+.aside .feed:hover .item-title {
+	color: var(--rb-text);
+}
+
+.aside .feed .favicon {
+	vertical-align: text-bottom;
+	margin-inline-end: 6px;
+}
+
+.tree-folder-items > .item.active > .item-title {
+	color: var(--rb-text);
+	font-weight: 600;
+}
+
+/* Unread feeds read as "pending": full text color + weight. */
+.feed .item-title:not([data-unread="0"]) {
+	color: var(--rb-text);
+	font-weight: 500;
+}
+
+/* Core reserves badge space via width calc(100% - 6rem) on unread rows; with
+ * Riverbed's border-box + padding-inline reserve that double-counts and
+ * truncates short names. One width for read and unread alike. */
+@media (min-width: 841px) {
+	.aside .feed .item-title,
+	.aside .feed .item-title:not([data-unread="0"]) {
+		width: calc(100% - 2.25rem);
+	}
+}
+
+/* -- Unread counts: quiet right-aligned tabular numbers ------------------- */
+.aside .category .tree-folder-title .title:not([data-unread="0"])::after,
+.aside .feed .item-title:not([data-unread="0"])::after {
+	padding: 0;
+	min-width: 0;
+	background: none;
+	color: var(--rb-text-3);
+	font-size: var(--rb-text-11);
+	font-weight: 500;
+	font-variant-numeric: tabular-nums;
+	right: var(--rb-space-3);
+	top: 50%;
+	margin: 0;
+	transform: translateY(-50%);
+}
+
+.feed.active .item-title:not([data-unread="0"])::after {
+	color: var(--rb-text-2);
+	border: none;
+	font-weight: 500;
+}
+
+/* Feed states. */
+.aside .feed.error .item-title {
+	color: var(--rb-danger);
+}
+
+.aside .feed.mute .item-title {
+	opacity: 0.55;
+}
+
+/* Per-feed gear only materializes on interaction (core behavior). */
+.aside_feed .tree-folder-title button.dropdown-toggle {
+	border-radius: var(--rb-radius-s);
+	flex: none;
+}
+
+/* Desktop prev/up/next pager bottom-left. */
+#nav_entries {
+	background: var(--rb-surface);
+	border-top: 1px solid var(--rb-hairline);
+}

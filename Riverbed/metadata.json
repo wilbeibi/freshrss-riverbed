@@ -1,0 +1,8 @@
+{
+	"name": "Riverbed",
+	"author": "wilbeibi",
+	"description": "Reading-first theme: Tufte warm-white light, Linear near-black dark, typography-first",
+	"version": 0.1,
+	"files": ["riverbed.css"],
+	"theme-color": {"light": "#fffff8", "dark": "#08090a"}
+}

@@ -1,0 +1,53 @@
+/* ---------------------------------------------------------------------------
+ * Icons. FreshRSS icons are <img class="icon"> SVGs, so color rides on CSS
+ * filters. Chrome stays quiet monochrome; paired icons (read/unread,
+ * starred/non-starred) differ in shape, so grayscale never removes meaning.
+ * Favicons, thumbnails and article images carry no .icon class — untouched.
+ * ------------------------------------------------------------------------- */
+
+img.icon {
+	filter: grayscale(1) opacity(0.65);
+	transition: filter var(--rb-dur-2) var(--rb-ease);
+}
+
+:is(a, button, .btn):is(:hover, :focus-visible) img.icon,
+:is(.active, [aria-current]) img.icon {
+	filter: grayscale(1) opacity(0.95);
+}
+
+/* The one colorful exception: an active star keeps its native gold
+ * (#f1c40f in the SVG) so starred state reads at a glance. The hollow
+ * non-starred star stays monochrome with the rest of the chrome. */
+img.icon[src*="starred.svg"]:not([src*="non-starred"]) {
+	filter: none;
+	opacity: 0.95;
+}
+
+/* Emoji icon mode (icons_as_emojis) renders <span class="icon">: no filter. */
+span.icon {
+	filter: none;
+}
+
+/* Dark: flip to light-on-dark. light-dark() cannot feed filter, so this is
+ * the one place that needs the media query, gated exactly like core does. */
+@media screen and (prefers-color-scheme: dark) {
+	:root.darkMode_auto img.icon {
+		filter: invert(1) grayscale(1) opacity(0.7);
+	}
+
+	:root.darkMode_auto :is(a, button, .btn):is(:hover, :focus-visible) img.icon,
+	:root.darkMode_auto :is(.active, [aria-current]) img.icon {
+		filter: invert(1) grayscale(1) opacity(1);
+	}
+
+	/* Gold star exception again: never invert an active star. */
+	:root.darkMode_auto img.icon[src*="starred.svg"]:not([src*="non-starred"]) {
+		filter: none;
+		opacity: 1;
+	}
+
+	/* Brand mark: keep it recognizable, readable on near-black. */
+	:root.darkMode_auto .header .logo {
+		filter: invert(1) hue-rotate(180deg) brightness(1.05);
+	}
+}

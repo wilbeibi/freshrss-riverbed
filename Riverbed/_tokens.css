@@ -1,0 +1,145 @@
+/* ---------------------------------------------------------------------------
+ * Riverbed tokens.
+ * The whole light/dark system rides on FreshRSS's per-user darkMode setting
+ * (Settings → Display): `no` → no class, `auto` → html.darkMode_auto.
+ * Every color is declared once with light-dark(); color-scheme resolves it.
+ * Light = Tufte warm white. Dark = Linear near-black (never pure black);
+ * elevation in dark comes from lighter surfaces, not shadows.
+ * ------------------------------------------------------------------------- */
+
+:root {
+	color-scheme: light;
+}
+:root.darkMode_auto {
+	color-scheme: light dark;
+}
+
+:root {
+	/* -- Color ------------------------------------------------------------ */
+	--rb-bg: light-dark(#fffff8, #08090a);
+	--rb-bg-translucent: light-dark(rgba(255, 255, 248, 0.88), rgba(8, 9, 10, 0.88));
+	--rb-surface: light-dark(#f7f7f2, #0f1011);
+	--rb-surface-2: light-dark(#ffffff, #191a1b);
+	--rb-hover: light-dark(#f1f1ea, #1f2023);
+	--rb-active: light-dark(#e9e9e1, #26282b);
+	--rb-border: light-dark(#e5e7eb, #23252a);
+	--rb-hairline: light-dark(rgba(17, 17, 17, 0.08), rgba(255, 255, 255, 0.1));
+
+	--rb-text: light-dark(#111111, #f7f8f8);
+	--rb-text-article: light-dark(#111111, #d0d6e0);
+	--rb-text-2: light-dark(#6b7280, #8a8f98);
+	/* Tertiary must still clear WCAG AA at meta sizes (dates, counts). */
+	--rb-text-3: light-dark(#697080, #7d838d);
+
+	--rb-accent: #5e6ad2;
+	--rb-accent-text: light-dark(#5e6ad2, #828fff);
+	--rb-accent-hover: light-dark(#4f5ac8, #93a0ff);
+	--rb-accent-tint: color-mix(in oklab, var(--rb-accent) 11%, transparent);
+	--rb-accent-solid: light-dark(#4a55c5, #4f5ac8);
+
+	--rb-code-bg: light-dark(#f2f2ec, #191a1b);
+
+	--rb-danger: light-dark(#b91c1c, #f87171);
+	--rb-danger-tint: color-mix(in oklab, var(--rb-danger) 12%, transparent);
+	--rb-ok: light-dark(#15803d, #4ade80);
+
+	/* Functional depth only (drawer/dropdown separation); decorative shadows
+	 * stay off. In dark the surface step does most of the work. */
+	--rb-shadow-overlay: 0 8px 24px light-dark(rgba(17, 17, 17, 0.10), rgba(0, 0, 0, 0.5));
+
+	/* -- Type ------------------------------------------------------------- */
+	--rb-font-ui: InterVariable, system-ui, -apple-system, "Segoe UI", Roboto,
+		"PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei",
+		sans-serif;
+	--rb-font-article: Newsreader, Charter, "Iowan Old Style", Georgia,
+		"Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", serif;
+	--rb-font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo,
+		Consolas, "Liberation Mono", monospace;
+
+	--rb-text-11: 0.6875rem;
+	--rb-text-12: 0.75rem;
+	--rb-text-13: 0.8125rem;
+	--rb-text-14: 0.875rem;
+	--rb-text-15: 0.9375rem;
+	--rb-text-16: 1rem;
+	--rb-text-18: 1.125rem;
+	--rb-text-20: 1.25rem;
+	--rb-text-24: 1.5rem;
+	--rb-text-32: 2rem;
+
+	--rb-ui: var(--rb-text-13);        /* chrome default (Linear density) */
+	--rb-ui-meta: var(--rb-text-12);   /* timestamps, counts, help text */
+	--rb-article-size: var(--rb-text-18);
+	--rb-article-leading: 1.6;         /* CJK/Latin mixed prose */
+
+	/* -- Space / shape / motion / z --------------------------------------- */
+	--rb-space-1: 4px;
+	--rb-space-2: 8px;
+	--rb-space-3: 12px;
+	--rb-space-4: 16px;
+	--rb-space-5: 24px;
+	--rb-space-6: 32px;
+	--rb-space-7: 48px;
+
+	--rb-radius-s: 6px;
+	--rb-radius-m: 12px;
+	--rb-radius-pill: 999px;
+
+	--rb-ease: cubic-bezier(0, 0, 0.2, 1);
+	--rb-dur-1: 100ms;
+	--rb-dur-2: 150ms;
+	--rb-dur-3: 200ms;
+
+	/* Align with frss.css usage: drawer/backdrop 100, slider 1000+. */
+	--rb-z-dropdown: 50;
+	--rb-z-drawer: 100;
+	--rb-z-slider: 1000;
+	--rb-z-notification: 1100;
+
+	accent-color: var(--rb-accent);
+
+	/* -- Map onto FreshRSS core variables ---------------------------------
+	 * frss.css structure (drawer, dropdown shells, scrollbars, modal veils)
+	 * inherits the palette through these. */
+	--frss-font-color-dark: var(--rb-text);
+	--frss-font-color-grey-dark: var(--rb-text-2);
+	--frss-font-color-grey-light: var(--rb-text-3);
+	--frss-font-color-light: #ffffff;
+	--frss-font-color-disabled: var(--rb-text-3);
+	--frss-font-color-error: var(--rb-danger);
+	--frss-background-color-error-transparent: var(--rb-danger-tint);
+
+	--frss-background-color: var(--rb-bg);
+	--frss-background-color-transparent: var(--rb-bg-translucent);
+	--frss-background-color-middle: var(--rb-hover);
+	--frss-background-color-dark: var(--rb-active);
+
+	--frss-border-color: var(--rb-border);
+	--frss-border-color-error: var(--rb-danger);
+
+	--frss-switch-accent-color: var(--rb-accent);
+
+	--frss-dragdrop-color: var(--rb-accent);
+	--frss-dragdrop-color-transparent: var(--rb-accent-tint);
+
+	--frss-noThumbnailImage-background-color: var(--rb-hover);
+
+	--frss-darken-background-hover-transparent: light-dark(rgba(17, 17, 17, 0.05), rgba(255, 255, 255, 0.05));
+
+	--frss-modal-background-color-transparent: light-dark(rgba(17, 17, 17, 0.45), rgba(0, 0, 0, 0.6));
+
+	--frss-box-shadow-color-transparent: light-dark(rgba(17, 17, 17, 0.12), rgba(0, 0, 0, 0.55));
+
+	/* Core default is 300px; 240px returns the space to the reading column.
+	 * Also drives the header logo cell and the mobile drawer width. */
+	--width-aside: 240px;
+
+	--frss-scrollbar-handle: light-dark(rgba(17, 17, 17, 0.16), rgba(255, 255, 255, 0.14));
+	--frss-scrollbar-handle-hover: light-dark(rgba(17, 17, 17, 0.32), rgba(255, 255, 255, 0.28));
+	--frss-scrollbar-track: transparent;
+	--frss-scrollbar-track-hover: transparent;
+}
+
+::selection {
+	background: color-mix(in oklab, var(--rb-accent) 22%, transparent);
+}

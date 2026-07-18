@@ -1,0 +1,272 @@
+/* ---------------------------------------------------------------------------
+ * Controls: buttons, inputs, selects. Complete state sets.
+ * (Settings-page layout, switches, tables land with the panels milestone.)
+ * ------------------------------------------------------------------------- */
+
+/* -- Buttons ----------------------------------------------------------------
+ * Default buttons are quiet: transparent, fill on hover. One filled accent
+ * action per screen (.btn-important). Danger confirms are .btn-attention.
+ * ------------------------------------------------------------------------- */
+
+.btn,
+a.btn {
+	padding: 4px 10px;
+	border: 1px solid transparent;
+	border-radius: var(--rb-radius-s);
+	background: transparent;
+	color: var(--rb-text);
+	font-size: var(--rb-ui);
+	line-height: 1.45;
+	transition: background-color var(--rb-dur-2) var(--rb-ease), color var(--rb-dur-2) var(--rb-ease);
+}
+
+.btn:hover {
+	background: var(--rb-hover);
+	text-decoration: none;
+}
+
+.btn:active {
+	background: var(--rb-active);
+}
+
+.btn.active {
+	background: var(--rb-accent-tint);
+	color: var(--rb-accent-text);
+}
+
+.btn[disabled] {
+	color: var(--rb-text-3);
+	background: transparent;
+}
+
+/* The one filled action. --rb-accent-solid is tuned so white text passes AA. */
+.btn-important,
+a.btn.btn-important {
+	background: var(--rb-accent-solid);
+	border-color: transparent;
+	color: #ffffff;
+	font-weight: 500;
+}
+
+.btn-important:hover {
+	background: light-dark(#3f49b5, #5e6ad2);
+	color: #ffffff;
+}
+
+.btn-important:active {
+	background: light-dark(#39429f, #6a76e0);
+}
+
+.btn-attention,
+a.btn.btn-attention {
+	background: transparent;
+	border-color: var(--rb-danger);
+	color: var(--rb-danger);
+	font-weight: 500;
+}
+
+.btn-attention:hover {
+	background: var(--rb-danger);
+	color: light-dark(#ffffff, #08090a);
+}
+
+/* -- Text inputs / selects / textareas ------------------------------------ */
+
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="file"],
+select,
+textarea {
+	padding: 4px 10px;
+	border: 1px solid var(--rb-border);
+	border-radius: var(--rb-radius-s);
+	background: var(--rb-surface-2);
+	color: var(--rb-text);
+	font-size: var(--rb-ui);
+	line-height: 1.45;
+	transition: border-color var(--rb-dur-2) var(--rb-ease), box-shadow var(--rb-dur-2) var(--rb-ease);
+}
+
+:is(input, select, textarea):focus {
+	outline: none;
+	border-color: var(--rb-accent);
+	box-shadow: 0 0 0 3px var(--rb-accent-tint);
+}
+
+:is(input, select, textarea):disabled {
+	color: var(--rb-text-3);
+	background: var(--rb-surface);
+}
+
+:is(input, textarea):user-invalid {
+	border-color: var(--rb-danger);
+}
+
+::placeholder {
+	color: var(--rb-text-2);
+	opacity: 1;
+}
+
+/* Fused input+button groups (.stick): join the radii. */
+.stick > :is(input, select, .btn):not(:first-child) {
+	border-start-start-radius: 0;
+	border-end-start-radius: 0;
+}
+
+.stick > :is(input, select, .btn):not(:last-child) {
+	border-start-end-radius: 0;
+	border-end-end-radius: 0;
+}
+
+.stick > .btn {
+	border: 1px solid var(--rb-border);
+	background: var(--rb-surface-2);
+	color: var(--rb-text-2);
+}
+
+.stick > .btn:hover {
+	background: var(--rb-hover);
+	color: var(--rb-text);
+}
+
+.stick > :is(input, select) + .btn,
+.stick > :is(input, select) + * .btn {
+	border-inline-start: none;
+}
+
+/* -- Switches ---------------------------------------------------------------
+ * Core drives colors via the mapped --frss vars (accent when on, --rb-active
+ * when off); only the knob needs a constant readable color.
+ * ------------------------------------------------------------------------- */
+
+.switch::before {
+	background-color: #ffffff;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.switch:not([disabled]):hover::before {
+	background-color: #f2f2f2;
+}
+
+/* -- Settings pages --------------------------------------------------------- */
+
+.post {
+	font-size: var(--rb-ui);
+}
+
+fieldset {
+	border: none;
+	padding-inline: 0;
+}
+
+legend {
+	font-size: var(--rb-text-15);
+	font-weight: 600;
+	padding: var(--rb-space-3) 0 var(--rb-space-1);
+}
+
+.form-group .group-name {
+	color: var(--rb-text-2);
+}
+
+.form-group.form-actions {
+	background: var(--rb-bg-translucent);
+	backdrop-filter: blur(6px);
+	border-top: 1px solid var(--rb-hairline);
+	padding: var(--rb-space-2) 0;
+}
+
+p.help,
+.help {
+	color: var(--rb-text-3);
+	font-size: var(--rb-ui-meta);
+}
+
+/* Settings sub-navigation. */
+.nav-list .item > a,
+.nav-list .item > .as-link,
+.nav-list .item > span {
+	padding: 5px var(--rb-space-3);
+	border-radius: var(--rb-radius-s);
+	color: var(--rb-text-2);
+}
+
+.nav-list .item > a:hover {
+	background: var(--rb-hover);
+	color: var(--rb-text);
+	text-decoration: none;
+}
+
+.nav-list .item.active > a,
+.nav-list .item.active > span {
+	background: var(--rb-accent-tint);
+	color: var(--rb-accent-text);
+	font-weight: 500;
+}
+
+.nav-list .nav-header {
+	padding: var(--rb-space-3) var(--rb-space-3) var(--rb-space-1);
+	color: var(--rb-text-3);
+	font-size: var(--rb-text-11);
+	font-weight: 500;
+}
+
+/* Config tables: row rules only, no full grids. */
+.post table,
+.table-wrapper table {
+	border-collapse: collapse;
+}
+
+.post :is(th, td),
+.table-wrapper :is(th, td) {
+	padding: 6px 12px;
+	border: none;
+	border-bottom: 1px solid var(--rb-hairline);
+	text-align: start;
+}
+
+.post th,
+.table-wrapper th {
+	color: var(--rb-text-2);
+	font-size: var(--rb-ui-meta);
+	font-weight: 600;
+}
+
+/* -- Alerts ----------------------------------------------------------------- */
+
+.alert {
+	background: var(--rb-surface);
+	border: 1px solid var(--rb-border);
+	border-radius: var(--rb-radius-s);
+	font-size: var(--rb-ui);
+	color: var(--rb-text);
+}
+
+.alert-error {
+	background: var(--rb-danger-tint);
+	border-color: transparent;
+	color: var(--rb-danger);
+}
+
+.alert-success {
+	background: color-mix(in oklab, var(--rb-ok) 12%, transparent);
+	border-color: transparent;
+	color: var(--rb-ok);
+}
+
+.log-item.log-error {
+	background-color: var(--rb-danger-tint);
+}
+
+/* Theme picker preview cards. */
+.theme-preview-list {
+	border: 1px solid var(--rb-border);
+	border-radius: var(--rb-radius-m);
+	overflow: hidden;
+}

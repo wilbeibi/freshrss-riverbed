@@ -1,0 +1,77 @@
+/* ---------------------------------------------------------------------------
+ * Base: page shell, links, generic type. Chrome register = 13px Inter.
+ * (Article prose is opted into the serif register in _article.css.)
+ * ------------------------------------------------------------------------- */
+
+html,
+body {
+	font-family: var(--rb-font-ui);
+	background-color: var(--rb-bg);
+	color: var(--rb-text);
+}
+
+body {
+	font-size: var(--rb-ui);
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+a {
+	color: var(--rb-accent-text);
+}
+
+a:hover {
+	color: var(--rb-accent-hover);
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.25;
+	text-wrap: balance;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+h1 {
+	font-size: var(--rb-text-24);
+}
+
+h2 {
+	font-size: var(--rb-text-18);
+}
+
+h3 {
+	font-size: var(--rb-text-15);
+}
+
+kbd {
+	font-family: var(--rb-font-mono);
+	font-size: var(--rb-text-11);
+	padding: 2px 5px;
+	border: 1px solid var(--rb-border);
+	border-bottom-width: 2px;
+	border-radius: 4px;
+	background: var(--rb-surface);
+	color: var(--rb-text);
+}
+
+/* Favicons never get filtered/inverted; keep them crisp and small. */
+img.favicon {
+	border-radius: 3px;
+}
+
+footer.main-footer {
+	color: var(--rb-text-3);
+	font-size: var(--rb-ui-meta);
+}
+
+footer.main-footer a {
+	color: var(--rb-text-2);
+}
+
+/* Loading spinner inherits core keyframes; just recolor. */
+.loading::after {
+	filter: none;
+}

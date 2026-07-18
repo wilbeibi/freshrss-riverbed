@@ -1,0 +1,5 @@
+Inter — Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
+Newsreader — Copyright 2020 Production Type (https://github.com/productiontype/Newsreader)
+
+Both are licensed under the SIL Open Font License 1.1:
+https://openfontlicense.org/open-font-license-official-text/

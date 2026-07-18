@@ -1,0 +1,8 @@
+*.rtl.css
+.DS_Store
+
+# Private / local-only: personal product notes, dev tooling, and
+# AGPL FreshRSS core CSS extracted for local selector diffing.
+PRODUCT.md
+scripts/
+reference/

@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/*!
+ * Riverbed — a reading-first theme for FreshRSS.
+ * Light: Tufte warm white. Dark: Linear near-black. Typography first.
+ * https://github.com/wilbeibi/freshrss-riverbed
+ *
+ * Loads after base-theme/frss.css (structure); partials own the skin.
+ * Import order matters: tokens first, a11y/motion last.
+ */
+@import "_tokens.css";
+@import "_fonts.css";
+@import "_base.css";
+@import "_icons.css";
+@import "_header-nav.css";
+@import "_sidebar.css";
+@import "_list.css";
+@import "_article.css";
+@import "_forms.css";
+@import "_panels.css";
+@import "_global-reader.css";
+@import "_login.css";
+@import "_mobile.css";
+@import "_a11y-motion.css";

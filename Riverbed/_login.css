@@ -1,0 +1,54 @@
+/* ---------------------------------------------------------------------------
+ * Login / auth pages (body.formLogin, main.prompt).
+ * Note: FreshRSS renders auth pages with the DEFAULT user's theme.
+ * ------------------------------------------------------------------------- */
+
+main.prompt {
+	background: var(--rb-surface-2);
+	border: 1px solid var(--rb-hairline);
+	border-radius: var(--rb-radius-m);
+	padding: var(--rb-space-6) var(--rb-space-6) var(--rb-space-5);
+}
+
+main.prompt h1 {
+	margin-top: 0;
+	font-size: var(--rb-text-20);
+}
+
+main.prompt form {
+	text-align: start;
+}
+
+main.prompt label {
+	display: block;
+	margin: var(--rb-space-3) 0 var(--rb-space-1);
+	color: var(--rb-text-2);
+	font-size: var(--rb-ui);
+	font-weight: 500;
+}
+
+main.prompt input[type="text"],
+main.prompt input[type="password"] {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 8px 12px;
+}
+
+main.prompt .stick {
+	width: 100%;
+}
+
+main.prompt .stick > input {
+	flex: 1;
+}
+
+main.prompt .btn-important {
+	margin-top: var(--rb-space-4);
+	width: 100%;
+	padding: 8px 12px;
+}
+
+main.prompt .link-registration {
+	color: var(--rb-text-2);
+	font-size: var(--rb-ui);
+}

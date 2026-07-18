@@ -1,0 +1,105 @@
+/* ---------------------------------------------------------------------------
+ * Mobile (core's single breakpoint: 840px). Core re-architects the layout
+ * (drawer sidebar, bottom pager, sheet dropdowns); Riverbed restyles it and
+ * guarantees touch ergonomics. The drawer's width:0 -> width transition is
+ * load-bearing for the TouchControl extension — never change its mechanism.
+ * ------------------------------------------------------------------------- */
+
+/* Row actions cannot rely on hover where there is no hover. */
+@media (hover: none) {
+	.flux .item.manage .item-element,
+	.flux .item.share .item-element,
+	.flux .item.link .item-element,
+	.flux .item.labels .item-element {
+		opacity: 1;
+	}
+}
+
+@media (max-width: 840px) {
+	:root {
+		--rb-article-size: 1.03125rem; /* 16.5px */
+	}
+
+	.flux .item.manage .item-element,
+	.flux .item.share .item-element,
+	.flux .item.link .item-element,
+	.flux .item.labels .item-element {
+		opacity: 1;
+	}
+
+	/* Drawer: full-height surface; close strip at top. */
+	.aside .toggle_aside {
+		padding: 14px 0;
+		border-bottom-color: var(--rb-hairline);
+	}
+
+	/* Bottom prev/up/next pager: thumb-sized, safe-area aware. */
+	#nav_entries {
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+
+	#nav_entries .btn {
+		min-height: 44px;
+		border-radius: 0;
+	}
+
+	/* Settings sheet slides from the end edge: round only its leading edge. */
+	.configure .dropdown .dropdown-menu {
+		border-radius: 0;
+		border-start-start-radius: var(--rb-radius-m);
+		border-end-start-radius: var(--rb-radius-m);
+		border: none;
+		border-inline-start: 1px solid var(--rb-hairline);
+	}
+
+	/* Core re-adds little pointer arrows on mobile menus; they assume the
+	 * menu shares the page background. Cards stand on their own. */
+	.dropdown-target:target ~ .dropdown-toggle::after {
+		display: none;
+	}
+
+	/* Touch targets ≥44px in the chrome. */
+	.nav_menu .btn {
+		padding: 9px 12px;
+	}
+
+	.tree-folder-title {
+		padding-top: 9px;
+		padding-bottom: 9px;
+	}
+
+	.aside .feed .item-title {
+		padding-top: 9px;
+		padding-bottom: 9px;
+	}
+
+	.flux .flux_header .item .item-element {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	/* Open article: the topline repeats the byline's source + date just
+	 * below it. Drop the duplicate to reclaim a bar of vertical space. */
+	.flux.current .flux_header .item.website,
+	.flux.current .flux_header .date {
+		display: none;
+	}
+
+	/* Trim the wrapping toolbar toward a single row: demote controls that are
+	 * rare on a phone or reachable elsewhere. All stay available on desktop.
+	 * (Real FreshRSS 1.29 nav_menu IDs.) */
+	#nav_menu_sort,
+	#nav_menu_queries,
+	#toggle-non-starred {
+		display: none;
+	}
+	/* Bigger lever, if you never switch view on mobile: also hide the
+	 * reading-mode toggles. Uncomment to reach a single row. */
+	/* #nav_menu_views { display: none; } */
+
+	/* Full-width top notification: keep only bottom corners. */
+	.notification {
+		border-radius: 0 0 var(--rb-radius-m) var(--rb-radius-m);
+		border-top: none;
+	}
+}

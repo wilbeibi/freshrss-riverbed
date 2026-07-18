@@ -1,0 +1,29 @@
+/* ---------------------------------------------------------------------------
+ * Accessibility + motion discipline. Loaded LAST so it wins the cascade.
+ * ------------------------------------------------------------------------- */
+
+/* One consistent, visible keyboard focus ring everywhere. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+	outline: 2px solid var(--rb-accent);
+	outline-offset: 2px;
+}
+
+/* Mouse/touch focus stays quiet; keyboard focus never does. */
+:where(a, button):focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* Core only pauses its spinners; Riverbed zeroes everything, including
+ * frss.css's drawer width and slider transitions. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+		transition-delay: 0ms !important;
+		animation-duration: 0.01ms !important;
+		animation-delay: 0ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+	}
+}

@@ -1,0 +1,274 @@
+/* ---------------------------------------------------------------------------
+ * Article reading surface — where the theme earns its keep.
+ * Serif prose (Newsreader, CJK system serif) at 18px/1.6 on a measured
+ * column; the content_width user setting maps to real measures.
+ * Feed HTML is arbitrary: every common element gets a sane default.
+ * ------------------------------------------------------------------------- */
+
+.flux_content .content {
+	font-family: var(--rb-font-article);
+	font-size: var(--rb-article-size);
+	color: var(--rb-text-article);
+}
+
+/* Measure re-map (+6rem = core's horizontal padding, so the text area
+ * itself gets the stated measure). "medium" is the 66ch ideal. */
+.content_thin {
+	max-width: calc(58ch + 6rem);
+}
+
+.content_medium {
+	max-width: calc(66ch + 6rem);
+}
+
+.content_large {
+	max-width: calc(80ch + 6rem);
+}
+
+/* -- Article header -------------------------------------------------------- */
+
+.content > header h1.title {
+	font-size: 1.55em;
+	line-height: 1.25;
+	font-weight: 600;
+	letter-spacing: 0;
+	margin: 0.3em 0 0.4em;
+	text-wrap: balance;
+}
+
+.content > header h1.title a {
+	color: var(--rb-text);
+}
+
+.content > header h1.title a:hover {
+	color: var(--rb-accent-text);
+	text-decoration: none;
+}
+
+/* Meta rows (source, author, date, actions) return to the UI register. */
+.content .article-header-topline,
+.content .subtitle {
+	font-family: var(--rb-font-ui);
+	font-size: var(--rb-text-12);
+	color: var(--rb-text-2);
+}
+
+.content > header,
+.content > footer {
+	color: var(--rb-text-2);
+	font-size: inherit;
+}
+
+.content .subtitle a,
+.content .article-header-topline a {
+	color: var(--rb-text-2);
+}
+
+.content .subtitle a:hover,
+.content .article-header-topline a:hover {
+	color: var(--rb-text);
+	text-decoration: none;
+}
+
+.content > footer .subtitle {
+	border-top: 1px solid var(--rb-hairline);
+	padding: 1rem 0;
+}
+
+/* Tag pills. */
+.content .tags .list-tags .item.tag a.link-tag {
+	display: inline-block;
+	padding: 2px 10px;
+	background: var(--rb-surface);
+	border: 1px solid var(--rb-hairline);
+	border-radius: var(--rb-radius-pill);
+	color: var(--rb-text-2);
+	font-size: var(--rb-text-11);
+	line-height: 1.6;
+}
+
+.content .tags .list-tags .item.tag a.link-tag:hover {
+	background: var(--rb-accent-tint);
+	border-color: transparent;
+	color: var(--rb-accent-text);
+	text-decoration: none;
+}
+
+/* -- Prose ------------------------------------------------------------------ */
+
+.content .text {
+	line-height: var(--rb-article-leading);
+	text-wrap: pretty;
+	/* Mixed CJK/Latin typesetting (progressive — ignored where unsupported):
+	 * insert the ~1/8em gap between 中文 and Latin/digits, trim leading space
+	 * off fullwidth punctuation, and let long Latin runs wrap inside CJK. */
+	text-autospace: normal;
+	text-spacing-trim: trim-start;
+	line-break: normal;
+	word-break: normal;
+	overflow-wrap: anywhere;
+}
+
+/* Math: browsers render MathML natively and KaTeX/MathJax carry their own
+ * fonts — keep prose typesetting from fighting either. */
+.content .text :is(math, .katex, .MathJax, mjx-container) {
+	font-family: revert;
+	text-autospace: no-autospace;
+	text-spacing-trim: normal;
+}
+
+.content .text p {
+	margin: 0 0 0.9em;
+}
+
+.content .text a {
+	color: var(--rb-accent-text);
+	text-decoration: underline;
+	text-decoration-color: color-mix(in oklab, var(--rb-accent-text) 40%, transparent);
+	text-underline-offset: 3px;
+	transition: text-decoration-color var(--rb-dur-2) var(--rb-ease);
+}
+
+.content .text a:hover {
+	color: var(--rb-accent-hover);
+	text-decoration-color: currentColor;
+}
+
+.content .text :is(h1, h2, h3, h4, h5, h6) {
+	margin: 1.5em 0 0.5em;
+	line-height: 1.25;
+	font-weight: 600;
+	color: var(--rb-text);
+	text-wrap: balance;
+}
+
+.content .text h1 { font-size: 1.4em; }
+.content .text h2 { font-size: 1.25em; }
+.content .text h3 { font-size: 1.1em; }
+.content .text :is(h4, h5, h6) { font-size: 1em; }
+
+.content .text blockquote {
+	margin: 1.4em 1.5em;
+	color: var(--rb-text-2);
+	font-style: italic;
+}
+
+.content .text blockquote cite {
+	font-style: normal;
+	font-size: 0.85em;
+}
+
+/* Code: mono on a raised panel; no borders. */
+.content .text pre {
+	margin: 1.2em 0;
+	padding: 14px 16px;
+	background: var(--rb-code-bg);
+	border-radius: var(--rb-radius-s);
+	font-size: 0.8em;
+	line-height: 1.55;
+}
+
+.content .text :is(pre, code, kbd, samp) {
+	font-family: var(--rb-font-mono);
+}
+
+.content .text code {
+	padding: 2px 5px;
+	border: none;
+	border-radius: 4px;
+	background: var(--rb-code-bg);
+	font-size: 0.82em;
+}
+
+.content .text pre code {
+	padding: 0;
+	background: none;
+	font-size: 1em;
+}
+
+/* Media. */
+.content .text img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--rb-radius-s);
+}
+
+.content .text :is(video, iframe, embed, object) {
+	max-width: 100%;
+	border-radius: var(--rb-radius-s);
+	border: none;
+}
+
+.content .text audio {
+	width: 100%;
+}
+
+.content .text figure {
+	margin: 1.4em 0;
+}
+
+.content .text figcaption {
+	margin-top: 8px;
+	font-family: var(--rb-font-ui);
+	font-size: var(--rb-text-12);
+	color: var(--rb-text-3);
+}
+
+/* Lists. */
+.content .text :is(ul, ol) {
+	margin: 0 0 0.9em;
+	padding: 0 0 0 1.5em;
+}
+
+.content .text li {
+	margin: 0.3em 0;
+}
+
+.content .text li::marker {
+	color: var(--rb-text-3);
+}
+
+/* Tables from feeds scroll inside their own box, never the page. */
+.content .text table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+	margin: 1.2em 0;
+	border-collapse: collapse;
+	font-family: var(--rb-font-ui);
+	font-size: 0.78em;
+}
+
+.content .text :is(th, td) {
+	padding: 6px 12px;
+	border: 1px solid var(--rb-border);
+	text-align: start;
+}
+
+.content .text th {
+	background: var(--rb-surface);
+	font-weight: 600;
+}
+
+.content .text hr {
+	margin: 2em auto;
+	border: none;
+	border-top: 1px solid var(--rb-hairline);
+}
+
+/* -- ArticleSummary extension (AI summary block) --------------------------- */
+
+:root {
+	--oai-bg-color: var(--rb-surface);
+	--oai-border-color: var(--rb-border);
+	--oai-border-radius: var(--rb-radius-m);
+	--oai-btn-bg: var(--rb-surface-2);
+	--oai-btn-hover-bg: var(--rb-hover);
+	--oai-btn-text: var(--rb-text-2);
+	--oai-text-color: var(--rb-text-article);
+}
+
+.oai-summary-wrap {
+	font-family: var(--rb-font-ui);
+	font-size: var(--rb-text-13);
+}
