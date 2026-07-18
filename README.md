@@ -5,9 +5,15 @@ Tufte warm-white light mode, Linear-style near-black dark mode, Newsreader serif
 for articles, Inter for chrome. Built for daily triage and long-form reading,
 in English and Chinese, on desktop and phone.
 
-| Light | Dark |
-|---|---|
-| ![Timeline, light](docs/list-light.png) | ![Timeline, dark](docs/list-dark.png) |
+**Timeline — light**
+
+![Timeline, light](docs/list-light.png)
+
+**Timeline — dark**
+
+![Timeline, dark](docs/list-dark.png)
+
+**Article view**
 
 ![Article view, light](docs/article-light.png)
 
