@@ -92,4 +92,5 @@ land immediately.
 ## Licensing
 
 Theme CSS: MIT. Bundled fonts: Inter (© The Inter Project Authors) and
-Newsreader (© Production Type), both SIL OFL 1.1 — see `Riverbed/fonts/OFL.txt`.
+Newsreader (© The Newsreader Project Authors), both SIL OFL 1.1 — see
+`Riverbed/fonts/OFL.txt`.

@@ -28,4 +28,4 @@ Notes on third-party content:
   they are not part of the theme and are not distributed with it.
 - Riverbed/fonts/ contains font software licensed under the SIL Open Font
   License 1.1: Inter (Copyright The Inter Project Authors) and Newsreader
-  (Copyright Production Type). See fonts/OFL.txt.
+  (Copyright The Newsreader Project Authors). See Riverbed/fonts/OFL.txt.
